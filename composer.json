@@ -1,0 +1,21 @@
+{
+	"name": "oan/helpers",
+	"description": "PHP Helpers",
+	"type": "library",
+	"homepage": "https://github.com/johanhermansson/PHP-Helpers",
+	"license": "Unlicense",
+	"authors": [
+		{
+			"name": "Johan Hermansson",
+			"email": "johan@johanhermansson.se"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"OAN\\Helpers\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=7.1"
+	}
+}

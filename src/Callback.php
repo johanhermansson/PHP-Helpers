@@ -4,7 +4,7 @@ use ReflectionException;
 use ReflectionMethod;
 
 /**
- * Callback class, for working with function or method callbacks.
+ * Callback class, for working with functions or method callbacks.
  */
 class Callback {
 
@@ -60,8 +60,7 @@ class Callback {
 			if ( $method->isStatic() ) {
 				return true;
 			}
-		} catch ( ReflectionException $e ) {
-		}
+		} catch ( ReflectionException $e ) {}
 
 		return false;
 	}
