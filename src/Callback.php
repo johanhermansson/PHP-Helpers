@@ -32,12 +32,16 @@ class Callback {
 			if ( ! self::is_static( $callback ) ) {
 				return '';
 			}
+		} else if ( is_callable( $callback ) ) {
+			return $callback;
 		} else if ( is_array( $callback ) and isset( $callback[0] ) and isset( $callback[1] ) ) {
 			if ( is_string( $callback[0] ) ) {
 				if ( ! self::is_static( implode( '::', $callback ) ) ) {
 					return '';
 				}
 			}
+		} else {
+			return '';
 		}
 
 		if ( ! is_callable( $callback, true ) ) {
