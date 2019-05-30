@@ -16,8 +16,9 @@ class Callback {
 	 * @return array|string Callable
 	 */
 	public static function get( $callback, $instance ) {
-		if ( is_string( $callback ) and substr( $callback, 0, 4 ) === 'this' ) {
-			$callback = [ $instance, end( explode( 'this::', $callback ) ) ];
+		if ( is_string( $callback ) and substr( $callback, 0, 4 ) === 'this' and isset( $instance ) ) {
+			$fn       = explode( 'this::', $callback );
+			$callback = [ $instance, end( $fn ) ];
 
 			if ( self::is_static( implode( '::', array_map( function( $item ) {
 				if ( is_object( $item ) )
@@ -26,8 +27,9 @@ class Callback {
 			}, $callback ) ) ) ) {
 				return '';
 			}
-		} else if ( is_string( $callback ) and substr( $callback, 0, 4 ) === 'self' ) {
-			$callback = get_class( $instance ) . '::' . end( explode( 'self::', $callback ) );
+		} else if ( is_string( $callback ) and substr( $callback, 0, 4 ) === 'self' and isset( $instance ) ) {
+			$fn       = explode( 'self::', $callback );
+			$callback = get_class( $instance ) . '::' . end( $fn );
 
 			if ( ! self::is_static( $callback ) ) {
 				return '';
