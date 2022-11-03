@@ -1,4 +1,5 @@
-<?php namespace OAN\Helpers;
+<?php
+namespace OAN\Helpers;
 
 use ReflectionException;
 use ReflectionMethod;
@@ -18,11 +19,13 @@ class Callback {
 	public static function get( $callback, $instance ) {
 		if ( is_string( $callback ) and substr( $callback, 0, 4 ) === 'this' and isset( $instance ) ) {
 			$fn       = explode( 'this::', $callback );
-			$callback = [ $instance, end( $fn ) ];
+			$callback = [$instance, end( $fn )];
 
-			if ( self::is_static( implode( '::', array_map( function( $item ) {
-				if ( is_object( $item ) )
+			if ( self::is_static( implode( '::', array_map( function ( $item ) {
+				if ( is_object( $item ) ) {
 					return get_class( $item );
+				}
+
 				return $item;
 			}, $callback ) ) ) ) {
 				return '';
